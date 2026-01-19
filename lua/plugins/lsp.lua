@@ -1,11 +1,11 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"hrsh7th/nvim-cmp",
+		-- "hrsh7th/nvim-cmp",
 		"saghen/blink.cmp",
 		"mason-org/mason.nvim",
 		"mason-org/mason-lspconfig.nvim",
-		"hrsh7th/cmp-nvim-lsp",
+		-- "hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
 		-- Mason setup
@@ -31,7 +31,7 @@ return {
 
 		-- Capabilities for completion
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
-		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+		-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 		-- List of servers
 		local servers = { "lua_ls", "pyright", "rust_analyzer", "html", "cssls", "clangd" }
