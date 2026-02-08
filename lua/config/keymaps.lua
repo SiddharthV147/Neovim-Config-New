@@ -42,3 +42,5 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.keymap.set("n", "<C-l>", ":Yazi<CR>", { silent = true, desc = "Open Yazi" })
+
+vim.keymap.set("n", "<leader>a", "ggVG")

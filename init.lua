@@ -1,1 +1,2 @@
-require('config.lazy')
+require("config.lazy")
+vim.opt.swapfile = false
