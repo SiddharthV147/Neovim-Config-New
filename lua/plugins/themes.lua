@@ -22,7 +22,7 @@ return {
 				hide_fillchars = false,
 				theme = {
 					dark = {
-						bg = "#0f1117",
+						bg = "#000000", -- ✅ black background
 						fg = "#c0caf5",
 						keyword = "#7aa2f7",
 						func = "#9ece6a",
@@ -33,6 +33,11 @@ return {
 				},
 			})
 			vim.cmd.colorscheme("cyberdream")
+
+			-- ✅ Force black background even when transparency is on
+			vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+			vim.api.nvim_set_hl(0, "NormalNC", { bg = "#000000" })
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
 		end,
 	},
 }

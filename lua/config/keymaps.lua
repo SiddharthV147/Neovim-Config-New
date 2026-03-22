@@ -4,6 +4,11 @@ vim.keymap.set("n", "<leader>n", ":Ex<CR>")
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
+-- local builtin = require("telescope.builtin")
+
+-- Search text across all files
+-- vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = "Project Search: Live Grep" })
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -52,3 +57,13 @@ vim.keymap.set("n", "<leader>TT", function()
 		vim.cmd("colorscheme cyberdream")
 	end
 end, { desc = "Toggle Theme" })
+
+vim.keymap.set("n", "<leader>pf", function()
+	require("telescope.builtin").find_files()
+end)
+vim.keymap.set("n", "<C-p>", function()
+	require("telescope.builtin").git_files()
+end)
+vim.keymap.set("n", "<leader>ps", function()
+	require("telescope.builtin").live_grep()
+end)
