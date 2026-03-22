@@ -42,3 +42,13 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.keymap.set("n", "<C-l>", ":Yazi<CR>", { silent = true, desc = "Open Yazi" })
+
+-- Toggle between cyberdream and catppuccin
+vim.keymap.set("n", "<leader>TT", function()
+	local current = vim.g.colors_name
+	if current == "cyberdream" then
+		vim.cmd("colorscheme catppuccin")
+	else
+		vim.cmd("colorscheme cyberdream")
+	end
+end, { desc = "Toggle Theme" })

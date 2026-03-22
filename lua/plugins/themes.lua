@@ -1,0 +1,38 @@
+return {
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		lazy = true,
+		config = function()
+			require("catppuccin").setup({
+				transparent_background = true,
+			})
+		end,
+	},
+	{
+		"scottmckendry/cyberdream.nvim",
+		priority = 1000,
+		lazy = false,
+		config = function()
+			require("cyberdream").setup({
+				transparent = true,
+				italic_comments = true,
+				terminal_colors = true,
+				hide_fillchars = false,
+				theme = {
+					dark = {
+						bg = "#0f1117",
+						fg = "#c0caf5",
+						keyword = "#7aa2f7",
+						func = "#9ece6a",
+						type = "#2ac3de",
+						string = "#e0af68",
+						comment = "#565f89",
+					},
+				},
+			})
+			vim.cmd.colorscheme("cyberdream")
+		end,
+	},
+}
