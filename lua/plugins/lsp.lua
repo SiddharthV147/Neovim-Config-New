@@ -11,7 +11,7 @@ return {
 		-- Mason setup
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "pyright", "rust_analyzer", "html", "cssls", "clangd" },
+			ensure_installed = { "lua_ls", "pyright", "rust_analyzer", "html", "cssls", "clangd", "jdtls" },
 		})
 
 		local on_attach = function(_, bufnr)
