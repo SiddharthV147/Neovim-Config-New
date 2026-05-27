@@ -6,6 +6,7 @@ return {
 		config = function()
 			require("telescope").setup({
 				defaults = {
+					file_ignore_patterns = { "^build/", "/build/" },
 					buffer_previewer_maker = function(filepath, bufnr, opts)
 						opts = opts or {}
 						filepath = vim.fn.expand(filepath)
