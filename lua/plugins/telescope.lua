@@ -6,21 +6,16 @@ return {
 		config = function()
 			require("telescope").setup({
 				defaults = {
-					file_ignore_patterns = { "^build/", "/build/" },
-					buffer_previewer_maker = function(filepath, bufnr, opts)
-						opts = opts or {}
-						filepath = vim.fn.expand(filepath)
-						vim.loop.fs_stat(filepath, function(_, stat)
-							if not stat then
-								return
-							end
-							if stat.size > 100000 then
-								return
-							else
-								require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
-							end
-						end)
-					end,
+					-- No slashes: matches these folder names anywhere in the path string
+					file_ignore_patterns = {
+						"node_modules",
+						"%.git",
+						"build",
+						"venv",
+						"%.venv",
+						"env",
+						"__pycache__",
+					},
 				},
 			})
 		end,
@@ -34,32 +29,24 @@ return {
 		config = function()
 			local null_ls = require("null-ls")
 			local formatting = null_ls.builtins.formatting
-			local diagnostics = null_ls.builtins.diagnostics
 
 			require("mason-null-ls").setup({
-				ensure_installed = {
-					"checkmake",
-					"prettier",
-					"eslint_d",
-					"shfmt",
-				},
+				ensure_installed = { "checkmake", "prettier", "eslint_d", "shfmt" },
 				automatic_installation = true,
 			})
-
-			local sources = {
-				diagnostics.checkmake,
-				formatting.prettier.with({ filetypes = { "html", "json", "yaml", "markdown" } }),
-				formatting.stylua,
-				formatting.shfmt.with({ args = { "-i", "4" } }),
-				formatting.terraform_fmt,
-				require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
-				require("none-ls.formatting.ruff_format"),
-			}
 
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 			null_ls.setup({
-				sources = sources,
+				sources = {
+					null_ls.builtins.diagnostics.checkmake,
+					formatting.prettier.with({ filetypes = { "html", "json", "yaml", "markdown" } }),
+					formatting.stylua,
+					formatting.shfmt.with({ args = { "-i", "4" } }),
+					formatting.terraform_fmt,
+					require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
+					require("none-ls.formatting.ruff_format"),
+				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
 						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
