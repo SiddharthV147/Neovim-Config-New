@@ -1,13 +1,12 @@
-require("nvchad.configs.lspconfig").defaults()
-
-local servers = { "html", "cssls" }
-vim.lsp.enable(servers)
-
--- clangd custom config via vim.lsp.config
 vim.lsp.config("clangd", {
+  cmd = { "clangd" },
+  filetypes = { "c", "cpp", "objc", "objcpp" },
+  root_markers = { "compile_commands.json", "compile_flags.txt", ".git" },
+  capabilities = require("nvchad.configs.lspconfig").capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
-    on_attach(client, bufnr)
+    require("nvchad.configs.lspconfig").on_attach(client, bufnr)
   end,
-  capabilities = capabilities,
 })
+
+vim.lsp.enable("clangd")
